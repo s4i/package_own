@@ -1,0 +1,8 @@
+[package]
+name = "lib_exec"
+version = "0.0.1"
+authors = ["s4i"]
+edition = "2018"
+
+[dependencies]
+package_own = { path = "../" }

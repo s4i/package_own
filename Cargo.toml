@@ -1,0 +1,25 @@
+[package]
+name = "package_own"
+version = "0.0.1"
+authors = ["s4i"]
+edition = "2018"
+license = "MIT"
+description = "Search cargo package path"
+homepage = "https://crates.io/crates/package_own"
+repository = "https://github.com/s4i/package_own"
+readme = "README.md"
+
+keywords = [
+    "cargo",
+    "path",
+]
+
+include = [
+    "/Cargo.toml",
+    "/LICENSE",
+    "/RELEASE.md",
+    "/src/*.rs",
+]
+
+[dependencies]
+regex = "1.3.1"
