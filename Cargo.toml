@@ -1,6 +1,6 @@
 [package]
 name = "package_own"
-version = "0.0.2"
+version = "0.0.3"
 authors = ["s4i"]
 edition = "2018"
 license = "MIT"
@@ -12,6 +12,7 @@ readme = "README.md"
 keywords = [
     "cargo",
     "path",
+    "package",
 ]
 
 include = [
@@ -20,6 +21,3 @@ include = [
     "/RELEASE.md",
     "/src/*.rs",
 ]
-
-[dependencies]
-regex = "1.3.1"

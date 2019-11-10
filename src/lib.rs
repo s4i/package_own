@@ -1,4 +1,3 @@
-use regex::Regex;
 use std::fs;
 use std::path::PathBuf;
 use std::result::Result;
@@ -32,14 +31,12 @@ pub fn parent_folder(file_name: &str) -> PathBuf {
     own_path
 }
 
-// $home/.cargo/registry/src/github.com-*/cargo-rls-install-{version}/
 fn push_path() -> PathBuf {
     let mut path = PathBuf::new();
     path.push(env!("CARGO_HOME"));
     path.push("registry");
     path.push("src");
     match github_folder(&path) {
-        // $home/.cargo/registry/src/github.com-*/
         Ok(dir) => path.push(dir),
         Err(e) => println!("{:?}", e),
     }
@@ -49,15 +46,20 @@ fn push_path() -> PathBuf {
 fn github_folder(path: &PathBuf) -> Result<String, String> {
     if path.is_dir() {
         let paths = fs::read_dir(path).unwrap();
-        let re_get_github = Regex::new(r"github.com-\b.+").unwrap();
 
         let mut dirs: Vec<String> = Vec::new();
         for path in paths {
             dirs.push(path.unwrap().path().display().to_string());
         }
 
-        if re_get_github.is_match(&dirs[0]) {
-            return Ok(re_get_github.find(&dirs[0]).unwrap().as_str().to_owned());
+        let s: Vec<_> = if cfg!(target_os = "windows") {
+            dirs[0].split('\\').collect()
+        } else {
+            dirs[0].split('/').collect()
+        };
+
+        if s[s.len() - 1].starts_with("github.com-") {
+            return Ok(s[s.len() - 1].to_owned());
         }
     }
     Err("Not found github.com-{random_number} directory".to_owned())
