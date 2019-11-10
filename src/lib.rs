@@ -22,8 +22,12 @@ pub fn parent_folder(file_name: &str) -> PathBuf {
         '-',
         env!("CARGO_PKG_VERSION")
     ));
-    if file_name.is_empty() {
-        own_path.push(file_name);
+    if !file_name.is_empty() {
+        let mut f = file_name.replace(r"\\", r"\");
+        f = f.replace(r"\", "/");
+        let s: Vec<_> = f.split('/').collect();
+        let tail_path: PathBuf = s.iter().collect();
+        own_path.push(tail_path);
     }
     own_path
 }
