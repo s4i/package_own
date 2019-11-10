@@ -1,6 +1,6 @@
 # Purpose
 
-- When installed from "cargo install", find the folder where the installation package is located.
+- When installed from `cargo install`, find the folder where the installation package is located.
 
 ## Usage1 (Search own local package)
 
